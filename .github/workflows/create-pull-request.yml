@@ -18,4 +18,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          PULL_REQUEST_URI=$(gh pr create --base develop --head develop --title "PRDリリース" --body "リリースPR" -l "release" --reviewer member-name)
+          PULL_REQUEST_URI=$(gh pr create --base main --head develop --title "PRDリリース" --body "必要であれば何か書く" -l "release" --reviewer daiki510)
