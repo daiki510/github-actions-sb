@@ -1,0 +1,21 @@
+name: 'PR develop 2 main'
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '0 1 * * 1'
+
+jobs:
+  develop2sandbox:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: develop
+      - name: create pull request for develop 2 main
+        id: create-pull-request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          PULL_REQUEST_URI=$(gh pr create --base develop --head develop --title "PRDリリース" --body "リリースPR" -l "release" --reviewer member-name)
