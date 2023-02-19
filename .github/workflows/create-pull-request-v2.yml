@@ -12,9 +12,9 @@ jobs:
       - name: Checkout main branch
         uses: actions/checkout@v2
         with:
-          ref: main # 対象ブランチ1
+          ref: develop # 対象ブランチ1
       - name: Merge feature branch
-        run: git merge origin/develop # 対象ブランチ2
+        run: git merge origin/main # 対象ブランチ2
       - name: Check if there are any changes
         run: git diff --quiet HEAD^ HEAD # 直前のコミットと比較して差分があるかを確認
         id: check-diff
@@ -27,3 +27,4 @@ jobs:
           body: 'This pull request is automatically created to review the changes made in the feature branch.'
           branch: develop # 対象ブランチ1
           base: main # 対象ブランチ2
+          labels: 'release'
