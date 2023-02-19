@@ -15,7 +15,7 @@ jobs:
           ref: develop
           fetch-depth: 0
       - name: check diff
-        id: diff first
+        id: diff_first
         run: git diff main...develop
       - name: check diff v2
         id: diff
