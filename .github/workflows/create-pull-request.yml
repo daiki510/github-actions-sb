@@ -16,10 +16,10 @@ jobs:
           fetch-depth: 0
       - name: check diff
         id: diff_first
-        run: git diff main...develop
+        run: git diff main develop
       - name: check diff v2
         id: diff
-        run: echo "::set-output name=changed::$(git diff main...develop | wc -l)"
+        run: echo "::set-output name=changed::$(git diff main develop | wc -l)"
       - name: output if
         if: ${{ steps.diff.outputs.changed != '0' }}
         run: echo "差分あり：${{steps.diff.outputs.changed}}"
