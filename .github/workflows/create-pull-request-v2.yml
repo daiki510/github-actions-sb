@@ -9,22 +9,8 @@ jobs:
   check-diff:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main branch
-        uses: actions/checkout@v2
-        with:
-          ref: main
-      - name: Checkout develop branch
-        uses: actions/checkout@v2
-        with:
-          ref: develop
-      - name: Merge main branch into develop branch
-        run: git merge origin/develop
-      - name: Check if there are any changes
-        run: git diff --exit-code HEAD^ HEAD || echo "::set-output name=diff::changes"
-        id: check-diff
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
-        if: steps.check-diff.outputs.diff == 'changes'
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: 'PRDリリース'
