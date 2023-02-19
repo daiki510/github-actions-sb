@@ -2,11 +2,9 @@ name: 'PR develop 2 main'
 
 on:
   workflow_dispatch:
-  # schedule:
-  #   - cron: '0 1 * * 1'
 
 jobs:
-  develop2sandbox:
+  develop2main:
     runs-on: ubuntu-latest
 
     steps:
