@@ -2,6 +2,8 @@ name: 'PR develop 2 main'
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 1 * * 1'
 
 jobs:
   develop2main:
@@ -11,6 +13,16 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: develop
+          fetch-depth: 0
+      - name: check diff
+        id: diff first
+        run: git diff main...develop
+      - name: check diff v2
+        id: diff
+        run: echo "::set-output name=changed::$(git diff main...develop | wc -l)"
+      - name: output if
+        if: ${{ steps.diff.outputs.changed != '0' }}
+        run: echo "差分あり：${{steps.diff.outputs.changed}}"
       - name: create pull request for develop 2 main
         id: create-pull-request
         env:
