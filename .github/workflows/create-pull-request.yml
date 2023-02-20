@@ -16,10 +16,10 @@ jobs:
           fetch-depth: 0
       - name: Get diff between main and develop
         id: get-diff
-        uses: technote-space/get-diff-action@v1
+        uses: technote-space/get-diff-action@v6
         with:
-          base-branch: 'main'
-          compare-branch: 'develop'
+          FROM: 'main'
+          TO: 'develop'
       - name: create pull request for develop 2 main
         if: steps.get-diff.outputs.files != ''
         env:
