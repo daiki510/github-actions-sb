@@ -21,7 +21,7 @@ jobs:
           FROM: 'main'
           TO: 'develop'
       - name: create pull request for develop 2 main
-        if: steps.get-diff.outputs.files != ''
+        if: ${{ steps.get-diff.outputs.files != '' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
