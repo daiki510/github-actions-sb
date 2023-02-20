@@ -11,15 +11,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: develop
-          fetch-depth: 0
-      - name: Get diff between main and develop
-        id: get-diff
-        uses: technote-space/get-diff-action@v6
-        with:
-          BASE: 'main'
-          HEAD: 'develop'
       - name: create pull request for develop 2 main
-        if: ${{ steps.get-diff.outputs.files != '' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
