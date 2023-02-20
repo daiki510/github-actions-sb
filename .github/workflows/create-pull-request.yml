@@ -2,8 +2,6 @@ name: 'PR develop 2 main'
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 1 * * 1'
 
 jobs:
   develop2main:
@@ -26,8 +24,3 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           PULL_REQUEST_URI=$(gh pr create --base main --head develop --title "PRDリリース" --body "必要であれば何か書く" -l "release" --reviewer daiki510)
-        # with:
-        # title: 'Changes found between main and feature-branch'
-        # body: 'Please review the changes between main and feature-branch'
-        # branch: 'feature-branch'
-        # base: 'main'
