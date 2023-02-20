@@ -18,8 +18,8 @@ jobs:
         id: get-diff
         uses: technote-space/get-diff-action@v6
         with:
-          FROM: 'main'
-          TO: 'develop'
+          BASE: 'main'
+          HEAD: 'develop'
       - name: create pull request for develop 2 main
         if: ${{ steps.get-diff.outputs.files != '' }}
         env:
