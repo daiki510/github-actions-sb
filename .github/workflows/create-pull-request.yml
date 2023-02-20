@@ -14,15 +14,20 @@ jobs:
         with:
           ref: develop
           fetch-depth: 0
-      - name: check diff
-        id: diff
-        run: echo "::set-output name=changed::$(git diff main develop | wc -l)"
-      - name: output if
-        if: ${{ steps.diff.outputs.changed != '0' }}
-        run: echo "差分あり：${{steps.diff.outputs.changed}}"
+      - name: Get diff between main and develop
+        id: get-diff
+        uses: technote-space/get-diff-action@v1
+        with:
+          base-branch: 'main'
+          compare-branch: 'develop'
       - name: create pull request for develop 2 main
-        id: create-pull-request
+        if: steps.get-diff.outputs.files != ''
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           PULL_REQUEST_URI=$(gh pr create --base main --head develop --title "PRDリリース" --body "必要であれば何か書く" -l "release" --reviewer daiki510)
+        # with:
+        # title: 'Changes found between main and feature-branch'
+        # body: 'Please review the changes between main and feature-branch'
+        # branch: 'feature-branch'
+        # base: 'main'
