@@ -7,7 +7,6 @@
   "scripts": {
     "build": "npx tsc",
     "build:watch": "npx tsc --watch",
-    "exec": "node dist/index.js",
     "test": "jest"
   },
   "jest": {
