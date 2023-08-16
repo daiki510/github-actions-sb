@@ -23,4 +23,4 @@ jobs:
         if: steps.check_labels.outputs.skipDeploy != 'true'
         run: |
           # Add your deployment steps here
-          echo "Deploying..."
+          echo "Deploying...!"
