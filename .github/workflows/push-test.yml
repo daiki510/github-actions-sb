@@ -16,11 +16,14 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            console.log(context.payload);
+            console.log(context.payload.pull_request.labels);
             const labels = context.payload.pull_request.labels.map(label => label.name);
+            console.log(labels);
             core.setOutput('skipDeploy', labels.includes('Skip-Deploy'));
 
       - name: Deploy if not labeled with Skip-Deploy
         if: steps.check_labels.outputs.skipDeploy != 'true'
         run: |
           # Add your deployment steps here
-          echo "Deploying..."
+          echo "Deploying...!"
