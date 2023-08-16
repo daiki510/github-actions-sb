@@ -1,0 +1,26 @@
+name: Deploy on Merge to Develop
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if Skip-Deploy label is present
+        id: check_labels
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const labels = context.payload.pull_request.labels.map(label => label.name);
+            core.setOutput('skipDeploy', labels.includes('Skip-Deploy'));
+
+      - name: Deploy if not labeled with Skip-Deploy
+        if: steps.check_labels.outputs.skipDeploy != 'true'
+        run: |
+          # Add your deployment steps here
+          echo "Deploying..."
